@@ -3,8 +3,8 @@
 document.addEventListener("keydown", dibujarTeclado);
 const d = document.getElementById("areaDeDibujo");
 const papel = d.getContext("2d");
-let x  = 100;
-let y = 100;
+let x  = 0;
+let y = 0;
 
 let teclas = {
     LEFT : 37,
@@ -86,22 +86,21 @@ d.addEventListener("mouseup", e => {
 });
 
 //touch
-
-d.addEventListener("touchstart", evento => {
-        x = evento.touches[0].pageX;
-        y = evento.touches[0].pageY;
+d.addEventListener("touchstart", e => {
+        x = e.touches[0].pageX;
+        y = e.touches[0].pageY;
         isDrawing = true;
 });
 
-d.addEventListener("touchmove", evento => {
+d.addEventListener("touchmove", e => {
     if (isDrawing == true) {
-        dibujarLinea(colorcito, x - 10, y - 10, evento.touches[0].pageX - 10, evento.touches[0].pageY - 10, papel);
-        x = evento.touches[0].pageX;
-        y = evento.touches[0].pageY;
+        dibujarLinea(colorcito, x - 10, y - 10, e.touches[0].pageX - 10, e.touches[0].pageY - 10, papel);
+        x = e.touches[0].pageX;
+        y = e.touches[0].pageY;
     }
 });
 
-d.addEventListener("touchend", evento => {
+d.addEventListener("touchend", e => {
     isDrawing = false;
 });
 
@@ -122,11 +121,11 @@ color_black.addEventListener("click", colorBlack);
 
 function colorCyan() {
   colorcito = "cyan";
-  console.log("Color cyan seleccionado")
+  console.log("Color cyan seleccionado");
 };
 function colorMagenta() {
     colorcito = "magenta";
-    console.log("Color magenta seleccionado")
+    console.log("Color magenta seleccionado");
 };
 function colorYellow() {
     colorcito = "yellow";
