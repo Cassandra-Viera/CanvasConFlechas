@@ -5,8 +5,8 @@
 document.addEventListener("keydown", dibujarTeclado);
 const d = document.getElementById("areaDeDibujo");
 const papel = d.getContext("2d");
-let x  = 200;
-let y = 200;
+let x  = 100;
+let y = 100;
 
 let teclas = {
     LEFT : 37,
@@ -58,4 +58,33 @@ function dibujarLinea(color, xinicial, yinicial, xfinal, yfinal, lienzo) {
     lienzo.closePath();
 };
 
-dibujarLinea("white", 199, 199, 201, 201, papel);
+//dibujarLinea("white", 199, 199, 201, 201, papel);
+
+/*Hasta aquí llega dibujando con las flechas*/
+
+let isDrawing = false;
+
+d.addEventListener("mousedown", e => {
+    x = e.offsetX;
+    y = e.offsetY;
+    isDrawing = true;
+});
+
+d.addEventListener("mousemove", e => {
+    if (isDrawing === true) {
+        dibujarLinea("white", x, y, e.offsetX, e.offsetY, papel);
+        x = e.offsetX;
+        y = e.offsetY;
+        console.log("Me estoy moviendo");
+    }
+});
+
+d.addEventListener("mouseup", e => {
+    if (isDrawing === true) {
+        dibujarLinea("white", x, y, e.offsetX, e.offsetY, papel);
+
+        isDrawing = false;
+    }
+});
+
+//touch
